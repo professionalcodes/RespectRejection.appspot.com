@@ -1,8 +1,6 @@
-application: customrejection
-version: 1
 runtime: python27
 api_version: 1
-threadsafe: yes
+threadsafe: true
 
 handlers:
 - url: /css
@@ -11,26 +9,33 @@ handlers:
 - url: /js
   static_dir: static/js
 
-- url: /partials
-  static_dir: static/partials
-
-- url: /fonts
-  static_dir: static/fonts
-
 - url: /img
   static_dir: static/img
 
-- url: /
-  static_files: templates/index.html
-  upload: templates/index\.html
+- url: /fonts
+  static_dir: node_modules/bootstrap/dist/fonts 
+
+- url: /jquery
+  static_files: node_modules/jquery/dist/jquery.min.js
+  upload: node_modules/jquery/dist/jquery\.min\.js
   secure: always
 
-- url: /_ah/spi/.*
-  script: endpoints_backend.api
+- url: /bootstrap-css
+  static_files: node_modules/bootstrap/dist/css/bootstrap.min.css
+  upload: node_modules/bootstrap/dist/css/bootstrap\.min\.css
   secure: always
+
+- url: /bootstrap-js
+  static_files: node_modules/bootstrap/dist/js/bootstrap.min.js
+  upload: node_modules/bootstrap/dist/js/bootstrap\.min\.js
+  secure: always
+
+- url: /.*
+  script: main.app
 
 libraries:
-- name: endpoints
-  version: latest
-- name: pycrypto
+- name: webapp2
+  version: "2.5.2"
+
+- name: jinja2
   version: latest
