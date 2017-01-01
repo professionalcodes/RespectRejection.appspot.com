@@ -15,6 +15,17 @@ handlers:
 - url: /fonts
   static_dir: node_modules/bootstrap/dist/fonts 
 
+- url: /node_modules
+  static_dir: node_modules
+
+- url: /app 
+  static_dir: app 
+
+- url: /systemjs.config
+  static_files: systemjs.config.js
+  upload: systemjs\.config\.js
+  secure: always
+
 - url: /jquery
   static_files: node_modules/jquery/dist/jquery.min.js
   upload: node_modules/jquery/dist/jquery\.min\.js
