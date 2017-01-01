@@ -20,6 +20,12 @@ function mv_node_modules_out {
 	fi
 }
 
+function compile_typescripts {
+	for file in `ls *.ts`; do 
+		tsc $file
+	done;
+}
+
 function show_git_info {
 	git_user_email=`git config user.email`
 	git_username=`git config user.name`
