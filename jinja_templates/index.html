@@ -41,23 +41,40 @@
 
 {% block body %}
 
-<div class="container-fluid body-container">
+<div class="container-fluid body-container content">
 	<div class="row main-image-row">
-		<div class="col-md-12 main-image-col">
+		<div class="col-md-12 main-image-col content-inside">
 			<div class="col-md-4">
 				<p class="header-1">Create Your Own Customized Rejection Hotline</p>
 			</div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+			<div class="col-md-4 text-center">
+				<div class="social-media-login-container" style="width: 75%; margin-top: 8%">
+					<h3 style="color: white;">Sign Up or Login with</h3>
+					<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;">
+						<span class="fa fa-google"></span>Google
+					</a>
+					<a class="btn btn-block btn-social btn-facebook">
+						<span class="fa fa-facebook"></span>Facebook
+					</a>
+					<a class="btn btn-block btn-social btn-twitter">
+						<span class="fa fa-twitter"></span>Twitter
+					</a>
+				</div>
+			</div>
+			<div class="col-md-4 signup-form-col text-center">
 				<form id="signup-form">
+					<h2 class="text-center" style="color: white; margin-top: 8%;">Sign Up</h2>
 					<div class="form-group">
 				    	<label for="email"></label>
 				    	<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-				    	<small id="email-info" class="form-text text-muted">We'll never share your email with anyone else.</small>
 				  	</div>
-				  	<div class="form-group">
+				  	<div class="form-group" style="margin-top: 0">
 				    	<label for="password"></label>
 				    	<input type="password" name="password" class="form-control" id="password" placeholder="Password">
+				  	</div>
+				  	<div>
+				  		<label for="signup-btn"></label>
+				  		<input type="submit" id="signup-btn" class="btn btn-success" value="Sign Up">
 				  	</div>
 				</form>
 			</div>
@@ -65,15 +82,19 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<my-app>
+			<my-app></my-app>
 		</div>
 	</div>
-
 </div>
 
 {% endblock body %}
 
 {% block footer %}
+
+	<footer class="footer">
+		Footer
+	</footer>
+
 	{{ super() }}
 {% endblock footer %}
 

@@ -21,6 +21,12 @@ handlers:
 - url: /app 
   static_dir: app 
 
+- url: /font-awesome
+  static_dir: static/font-awesome 
+
+- url: /bootstrap-social
+  static_dir: node_modules/bootstrap-social
+  
 - url: /systemjs.config
   static_files: systemjs.config.js
   upload: systemjs\.config\.js

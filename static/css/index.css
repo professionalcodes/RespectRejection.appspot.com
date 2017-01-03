@@ -1,6 +1,11 @@
-body, html {
+html, body {
 	width: 100%;
 	height: 100%;
+	margin: 0;
+}
+
+a.btn-social {
+	height: 40px;
 }
 
 .body-container {
@@ -30,3 +35,42 @@ body, html {
 	margin-top: 3%;
 	padding-right: 10%;
 }
+
+.signup-form-col {
+	height: 100%;
+	background: #00264d;
+	margin: 0 auto;
+	/*opacity: 0.5;*/
+	/*background: linear-gradient(100deg, blue, white);*/
+}
+
+#email, #password {
+	width: 50%;
+	margin: 0 auto;
+}
+
+#email {
+	margin-bottom: -20px;
+}
+
+#signup-btn {
+	text-align: center;
+	margin: 0 auto;
+	width: 50%;
+}
+
+.content {
+  min-height: 100%;
+}
+
+.content-inside {
+  padding: 20px;
+  padding-bottom: 50px;
+}
+
+.footer {
+  height: 50px;
+  margin-top: -50px;
+  background: currentColor;
+}
+

@@ -26,6 +26,10 @@ function compile_typescripts {
 	done;
 }
 
+function run_respectrejection {
+	dev_appserver.py ~/OpenSource/CustomRejection/app.yaml 
+}
+
 function show_git_info {
 	git_user_email=`git config user.email`
 	git_username=`git config user.name`
