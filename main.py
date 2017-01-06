@@ -45,6 +45,14 @@ class Homepage(MainHandler):
 		pass
 
 
+class DeAuthFB(MainHandler):
+	def get(self):
+		pass
+
+	def post(self):
+		pass
 app = webapp2.WSGIApplication([
     ('/', Homepage),
+    ('/deauthfb', DeAuthFB),
+
 ], debug=True)
