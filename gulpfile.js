@@ -1,6 +1,8 @@
-var gulp 		= require('gulp'),
-	browserSync = require('browser-sync'),
-	reload 		= browserSync.reload;
+var gulp 			= require('gulp'),
+	browserSync 	= require('browser-sync').create(),
+	reload 			= browserSync.reload,
+	typescript  	= require('gulp-typescript'),
+	tsProject 		= typescript.createProject('tsconfig.json');
 
 var filepaths = {
 	jinja	: 'jinja_templates/*.html',
@@ -14,8 +16,11 @@ gulp.task('default',function() {
 	console.log('default task running');
 });
 
-gulp.task('reload:onsave', [], function() {
+gulp.task('compile:typescripts', [], function() {
+	return tsProject.src().pipe(tsProject())
+});
 
+gulp.task('reload:onsave', [], function() {
 	browserSync.init({
     	proxy: "localhost:8080"
     });
@@ -23,8 +28,8 @@ gulp.task('reload:onsave', [], function() {
 	gulp.watch(filepaths.jinja, []).on('change', reload); 
 	gulp.watch(filepaths.css, []).on('change', reload); 
 	gulp.watch(filepaths.js, []).on('change', reload); 
-	gulp.watch(filepaths.angular, []).on('change', reload); 
-	gulp.watch(filepaths.app_configuration, []);
+	gulp.watch(filepaths.angular, ['compile:typescripts']).on('change', reload); 
+	gulp.watch(filepaths.app_configuration, []).on('change', reload);
 });
 
 

@@ -50,7 +50,7 @@
 			<div class="col-md-4 text-center">
 				<div class="social-media-login-container" style="width: 75%; margin-top: 8%">
 					<h3 style="color: white;">Sign Up or Login with</h3>
-					<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;">
+					<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;" onclick="FirebaseHandler.handleGoogle()">
 						<span class="fa fa-google"></span>Google
 					</a>
 					<a class="btn btn-block btn-social btn-facebook">
@@ -58,6 +58,9 @@
 					</a>
 					<a class="btn btn-block btn-social btn-twitter">
 						<span class="fa fa-twitter"></span>Twitter
+					</a>
+					<a class="btn btn-block btn-social btn-github">
+						<span class="fa fa-github"></span>Github
 					</a>
 				</div>
 			</div>
@@ -95,6 +98,8 @@
 		Footer
 	</footer>
 
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+	<script src="/js/firebase.js"></script>
 	{{ super() }}
 {% endblock footer %}
 
