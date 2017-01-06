@@ -11,12 +11,8 @@ firebase.initializeApp(config);
 
 function Firebase() {}
 
-Firebase.prototype.handleFacebook = function() {}
-
-Firebase.prototype.handleGoogle = function() {
-	var googleProvider = new firebase.auth.GoogleAuthProvider();
-
-	firebase.auth().signInWithPopup(googleProvider).then(function(result){
+Firebase.prototype.login = function(provider) {
+	firebase.auth().signInWithPopup(provider).then(function(result){
 		var token = result.credential.accessToken;
 		var user = result.user;
 
@@ -26,6 +22,16 @@ Firebase.prototype.handleGoogle = function() {
 		var email = error.email;
 		var credential = error.credential;
 	});
+};
+
+Firebase.prototype.handleGoogle = function() {
+	var googleProvider = new firebase.auth.GoogleAuthProvider();
+	this.login(googleProvider);	
+};
+
+Firebase.prototype.handleFacebook = function() {
+	var facebookProvider = new firebase.auth.FacebookAuthProvider();
+	this.login(facebookProvider);
 };
 
 Firebase.prototype.handleTwitter = function() {}
