@@ -51,6 +51,7 @@ class DeAuthFB(MainHandler):
 
 	def post(self):
 		pass
+		
 app = webapp2.WSGIApplication([
     ('/', Homepage),
     ('/deauthfb', DeAuthFB),

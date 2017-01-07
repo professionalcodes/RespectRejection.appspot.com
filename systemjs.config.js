@@ -6,7 +6,7 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/' // not being used, just for demonstration
     },
     // map tells the System loader where to look for things
     map: {
@@ -14,18 +14,18 @@
       app: 'app',
 
       // angular bundles
-      '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
-      '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
-      '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
-      '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
-      '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-      '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
-      '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
-      '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      'angular2/core': 'angular2/core/bundles/core.umd.js',
+      'angular2/common': 'angular2/common/bundles/common.umd.js',
+      'angular2/compiler': 'angular2/compiler/bundles/compiler.umd.js',
+      'angular2/platform-browser': 'angular2/platform-browser/bundles/platform-browser.umd.js',
+      'angular2/platform-browser-dynamic': 'angular2/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+      'angular2/http': 'angular2/http/bundles/http.umd.js',
+      'angular2/router': 'angular2/router/bundles/router.umd.js',
+      'angular2/forms': 'angular2/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'rxjs':                      'rxjs',
+      // 'angular-in-memory-web-api': 'angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

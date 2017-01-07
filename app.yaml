@@ -12,40 +12,22 @@ handlers:
 - url: /img
   static_dir: static/img
 
-- url: /fonts
-  static_dir: node_modules/bootstrap/dist/fonts 
-
-- url: /node_modules
-  static_dir: node_modules
-
 - url: /app 
   static_dir: app 
 
-- url: /font-awesome
-  static_dir: static/font-awesome 
-
-- url: /bootstrap-social
-  static_dir: node_modules/bootstrap-social
-  
 - url: /systemjs.config
   static_files: systemjs.config.js
   upload: systemjs\.config\.js
   secure: always
 
-- url: /jquery
-  static_files: node_modules/jquery/dist/jquery.min.js
-  upload: node_modules/jquery/dist/jquery\.min\.js
-  secure: always
+- url: /angular2
+  static_dir: angular2
 
-- url: /bootstrap-css
-  static_files: node_modules/bootstrap/dist/css/bootstrap.min.css
-  upload: node_modules/bootstrap/dist/css/bootstrap\.min\.css
-  secure: always
-
-- url: /bootstrap-js
-  static_files: node_modules/bootstrap/dist/js/bootstrap.min.js
-  upload: node_modules/bootstrap/dist/js/bootstrap\.min\.js
-  secure: always
+- url: /@angular 
+  static_dir: angular2
+  
+- url: /rxjs
+  static_dir: rxjs
 
 - url: /.*
   script: main.app
@@ -53,6 +35,5 @@ handlers:
 libraries:
 - name: webapp2
   version: "2.5.2"
-
 - name: jinja2
   version: latest

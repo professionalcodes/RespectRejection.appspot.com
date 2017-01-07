@@ -1,8 +1,8 @@
 import { AppComponent } from './app.component';
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from 'angular2/core/testing';
+import { By }           from 'angular2/platform-browser';
+import { DebugElement } from 'angular2/core';
 
 describe('AppComponent', function () {
   let de: DebugElement;

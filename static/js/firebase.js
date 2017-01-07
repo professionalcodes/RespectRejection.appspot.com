@@ -25,7 +25,7 @@ Firebase.prototype.login = function(provider) {
 };
 
 Firebase.prototype.logout = function() {
-	firebase.auth().signout().then(function() {
+	firebase.auth().signOut().then(function() {
 
 	}, function(error) {
 		log(error);
@@ -50,6 +50,16 @@ Firebase.prototype.handleTwitter = function() {
 Firebase.prototype.handleGithub = function() {
 	var githubProvider = new firebase.auth.GithubAuthProvider();
 	this.login(githubProvider);
+};
+
+Firebase.prototype.authObserver = function() {
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			log(user);
+  		} else {
+  			log("user is not signed in");
+  		}
+	});
 };
 
 var FirebaseHandler = new Firebase();
