@@ -33,8 +33,8 @@
 	      		<a class="navbar-brand" href="/">Respect Rejection</a>
 	    	</div>
 	    	<ul class="nav navbar-nav">
-	    		<li class="nav-item"><a class="nav-link" href="/#/contact">Contact</a></li>
-	      		<li class="nav-item"><a class="nav-link" href="/#/about">About</a></li>
+	    		<li class="nav-item"><a class="nav-link" href="/#!/contact">Contact</a></li>
+	      		<li class="nav-item"><a class="nav-link" href="/#!/about">About</a></li>
 	   	 	</ul>
 			<ul class="nav navbar-nav navbar-right">
 	      		<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -45,9 +45,11 @@
 {% endblock header %}
 
 {% block body %}
+	<ng-view></ng-view>
+
 	<div class="container-fluid body-container content">
 
-		<div class="row main-image-row">
+		<div class="row main-image-row" ng-controller="RegisterCtrl">
 			<div class="col-xs-12 col-sm-4 col-md-4">
 				<p class="header-1 text-center">Create Your Own Customized Rejection Hotline</p>
 			</div>
@@ -88,7 +90,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<my-app></my-app>
+				
 			</div>
 		</div>
 	</div>
@@ -98,8 +100,7 @@
 	<footer class="footer">
 		Footer
 	</footer>
-	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
-	<script src="/js/firebase.js"></script>
+	
 	{{ super() }}
 {% endblock footer %}
 

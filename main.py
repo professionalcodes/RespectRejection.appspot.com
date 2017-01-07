@@ -52,8 +52,18 @@ class DeAuthFB(MainHandler):
 	def post(self):
 		pass
 		
+class About(MainHandler):
+	def get(self):
+		self.render("about.html")
+
+class Contact(MainHandler):
+	def get(self):
+		self.render("contact.html")
+		
 app = webapp2.WSGIApplication([
     ('/', Homepage),
+    ('/about', About),
+    ('/contact', Contact),
     ('/deauthfb', DeAuthFB),
 
 ], debug=True)

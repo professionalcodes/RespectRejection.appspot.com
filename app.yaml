@@ -15,6 +15,10 @@ handlers:
 - url: /fonts
   static_dir: static/fonts
 
+- url: /angular
+  static_dir: static/js/angular-1.6.0
+
+
 - url: /.*
   script: main.app
 
