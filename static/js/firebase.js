@@ -6,7 +6,6 @@ var config = {
     storageBucket: "respectrejection.appspot.com",
     messagingSenderId: "746933029039"
 };
-
 firebase.initializeApp(config);
 
 function Firebase() {}

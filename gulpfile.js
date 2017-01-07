@@ -1,8 +1,6 @@
 var gulp 			= require('gulp'),
 	browserSync 	= require('browser-sync').create(),
 	reload 			= browserSync.reload,
-	typescript  	= require('gulp-typescript'),
-	tsProject 		= typescript.createProject('tsconfig.json');
 
 var filepaths = {
 	jinja	: 'jinja_templates/*.html',
@@ -14,10 +12,6 @@ var filepaths = {
 
 gulp.task('default',function() {
 	console.log('default task running');
-});
-
-gulp.task('compile:typescripts', [], function() {
-	return tsProject.src().pipe(tsProject())
 });
 
 gulp.task('reload:onsave', [], function() {

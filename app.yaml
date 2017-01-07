@@ -12,22 +12,8 @@ handlers:
 - url: /img
   static_dir: static/img
 
-- url: /app 
-  static_dir: app 
-
-- url: /systemjs.config
-  static_files: systemjs.config.js
-  upload: systemjs\.config\.js
-  secure: always
-
-- url: /angular2
-  static_dir: angular2
-
-- url: /@angular 
-  static_dir: angular2
-  
-- url: /rxjs
-  static_dir: rxjs
+- url: /fonts
+  static_dir: static/fonts
 
 - url: /.*
   script: main.app
