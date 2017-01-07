@@ -24,6 +24,14 @@ Firebase.prototype.login = function(provider) {
 	});
 };
 
+Firebase.prototype.logout = function() {
+	firebase.auth().signout().then(function() {
+
+	}, function(error) {
+		log(error);
+	})
+};
+
 Firebase.prototype.handleGoogle = function() {
 	var googleProvider = new firebase.auth.GoogleAuthProvider();
 	this.login(googleProvider);	
@@ -34,7 +42,14 @@ Firebase.prototype.handleFacebook = function() {
 	this.login(facebookProvider);
 };
 
-Firebase.prototype.handleTwitter = function() {}
-Firebase.prototype.handleGithub = function() {}
+Firebase.prototype.handleTwitter = function() {
+	var twitterProvider = new firebase.auth.TwitterAuthProvider();
+	this.login(twitterProvider);
+};
+
+Firebase.prototype.handleGithub = function() {
+	var githubProvider = new firebase.auth.GithubAuthProvider();
+	this.login(githubProvider);
+};
 
 var FirebaseHandler = new Firebase();

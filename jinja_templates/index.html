@@ -9,9 +9,12 @@
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="systemjs.config"></script>
+	<script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
 	<script>
 		System.import('app').catch(function(err) { console.error(err); });
 	</script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
 {% endblock head %}
 
 {% block title %}
@@ -69,16 +72,16 @@
 			<div class="col-md-4 text-center">
 				<div class="social-media-login-container" style="width: 75%; margin-top: 8%">
 					<h3 style="color: white;">Sign Up or Login with</h3>
-					<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;" onclick="FirebaseHandler.handleGoogle()">
+					<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;" onclick="FirebaseHandler.handleGoogle();">
 						<span class="fa fa-google"></span>Google
 					</a>
 					<a class="btn btn-block btn-social btn-facebook" onclick="FirebaseHandler.handleFacebook();">
 						<span class="fa fa-facebook"></span>Facebook
 					</a>
-					<a class="btn btn-block btn-social btn-twitter">
+					<a class="btn btn-block btn-social btn-twitter" onclick="FirebaseHandler.handleTwitter();">
 						<span class="fa fa-twitter"></span>Twitter
 					</a>
-					<a class="btn btn-block btn-social btn-github">
+					<a class="btn btn-block btn-social btn-github" onclick="FirebaseHandler.handleGithub();">
 						<span class="fa fa-github"></span>Github
 					</a>
 				</div>
