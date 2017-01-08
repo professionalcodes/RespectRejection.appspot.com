@@ -59,11 +59,16 @@ class About(MainHandler):
 class Contact(MainHandler):
 	def get(self):
 		self.render("contact.html")
-		
+
+class Profile(MainHandler):
+	def get(self):
+		self.render("profile.html")
+
 app = webapp2.WSGIApplication([
     ('/', Homepage),
     ('/about', About),
     ('/contact', Contact),
+    ('/profile', Profile),
     ('/deauthfb', DeAuthFB),
 
 ], debug=True)

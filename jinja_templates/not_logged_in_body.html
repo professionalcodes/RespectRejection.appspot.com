@@ -1,0 +1,46 @@
+<div class="container-fluid body-container content">
+	<div class="row main-image-row" ng-controller="RootCtrl">
+		<div class="col-xs-12 col-sm-4 col-md-4">
+			<p class="header-1 text-center">Create Your Own Customized Rejection Hotline</p>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 text-center">
+			<div class="social-media-login-container">
+				<h3 class="social-media-login-text">Sign Up or Login with</h3>
+				<a class="btn btn-block btn-social btn-google" style="margin-top: 8%;" onclick="FirebaseHandler.handleGoogle();">
+					<span class="fa fa-google"></span>Google
+				</a>
+				<a class="btn btn-block btn-social btn-facebook" onclick="FirebaseHandler.handleFacebook();">
+					<span class="fa fa-facebook"></span>Facebook
+				</a>
+				<a class="btn btn-block btn-social btn-twitter" onclick="FirebaseHandler.handleTwitter();">
+					<span class="fa fa-twitter"></span>Twitter
+				</a>
+				<a class="btn btn-block btn-social btn-github" onclick="FirebaseHandler.handleGithub();">
+					<span class="fa fa-github"></span>Github
+				</a>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 signup-form-col text-center">
+			<form id="signup-form">
+				<h2 class="text-center signup-text">Sign Up</h2>
+				<div class="form-group">
+			    	<label for="email"></label>
+			    	<input type="email" class="form-control" id="email" placeholder="Enter email">
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="password"></label>
+			    	<input type="password" name="password" class="form-control" id="password" placeholder="Password">
+			  	</div>
+			  	<div>
+			  		<label for="signup-btn"></label>
+			  		<input type="submit" id="signup-btn" class="btn btn-success" value="Sign Up">
+			  	</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>

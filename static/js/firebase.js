@@ -54,7 +54,7 @@ Firebase.prototype.handleGithub = function() {
 Firebase.prototype.authObserver = function() {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			log(user);
+			window.location = "/#!/profile";
   		} else {
   			log("user is not signed in");
   		}
