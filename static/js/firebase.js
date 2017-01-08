@@ -54,11 +54,30 @@ Firebase.prototype.handleGithub = function() {
 Firebase.prototype.authObserver = function() {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			window.location = "/#!/profile";
+			var loggedInHeader = document.createElement("div");
+  			loggedInHeader.setAttribute('ng-include', "'/logged_in_header'");
+  			document.body.appendChild(loggedInHeader);
+  			angular.element('body')
+       		.injector()
+       		.invoke(['$compile', function ($compile) {
+            	var $scope = angular.element(loggedInHeader).scope();
+                $compile(loggedInHeader)($scope);
+                $scope.$apply();
+            }]);
   		} else {
-  			log("user is not signed in");
+  			var notLoggedInHeader = document.createElement("div");
+  			notLoggedInHeader.setAttribute('ng-include', "'/not_logged_in_header'");
+  			document.body.appendChild(notLoggedInHeader);
+  			angular.element('body')
+       		.injector()
+       		.invoke(['$compile', function ($compile) {
+            	var $scope = angular.element(notLoggedInHeader).scope();
+                $compile(notLoggedInHeader)($scope);
+                $scope.$apply();
+            }]);
   		}
 	});
 };
 
 var FirebaseHandler = new Firebase();
+FirebaseHandler.authObserver();

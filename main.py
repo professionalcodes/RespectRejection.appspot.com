@@ -39,7 +39,7 @@ class MainHandler(webapp2.RequestHandler):
 
 class Homepage(MainHandler):
 	def get(self):
-		self.render("index.html")		
+		self.render("base_template.html")		
 
 	def post(self):
 		pass
@@ -64,11 +64,20 @@ class Profile(MainHandler):
 	def get(self):
 		self.render("profile.html")
 
+class LoggedInHeader(MainHandler):
+	def get(self):
+		self.render("logged_in_header.html")
+
+class notLoggedInHeader(MainHandler):
+	def get(self):
+		self.render("not_logged_in_header.html")
+		
 app = webapp2.WSGIApplication([
     ('/', Homepage),
     ('/about', About),
     ('/contact', Contact),
     ('/profile', Profile),
+    ('/logged_in_header', LoggedInHeader),
     ('/deauthfb', DeAuthFB),
 
 ], debug=True)
