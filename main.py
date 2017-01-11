@@ -68,16 +68,27 @@ class LoggedInHeader(MainHandler):
 	def get(self):
 		self.render("logged_in_header.html")
 
-class notLoggedInHeader(MainHandler):
+class NotLoggedInHeader(MainHandler):
 	def get(self):
 		self.render("not_logged_in_header.html")
-		
+
+class LoggedInBody(MainHandler):
+	def get(self):
+		self.render("logged_in_body.html")
+
+class NotLoggedInBody(MainHandler):
+	def get(self):
+		self.render("not_logged_in_body.html")
+
 app = webapp2.WSGIApplication([
     ('/', Homepage),
     ('/about', About),
     ('/contact', Contact),
     ('/profile', Profile),
     ('/logged_in_header', LoggedInHeader),
+    ('/not_logged_in_header', NotLoggedInHeader),
+    ('/not_logged_in_body', NotLoggedInBody),
+    ('/logged_in_body', LoggedInBody),
     ('/deauthfb', DeAuthFB),
 
 ], debug=True)

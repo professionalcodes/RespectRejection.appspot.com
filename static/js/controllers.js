@@ -3,17 +3,11 @@
 var respectRejectionApp = respectRejectionApp || {};
 var controllers = respectRejectionApp.controllers = angular.module('respectRejectionAppControllers', []);
 
-controllers.controller('RootCtrl', ['$scope', '$location', function ($scope, $location) {
+controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', function ($scope, $location, FirebaseService) {
 	$scope.logLoaded = function() {
-		log("root controller loaded");
+		FirebaseService.sayHello();
 	};
-
-	$scope.startAuthObserver = function() {
-		FirebaseHandler.authObserver();
-	};
-
-	$scope.startAuthObserver();
-
+	
 }]);
 
 controllers.controller('ProfileCtrl', ['$scope', '$location', function ($scope, $location) {

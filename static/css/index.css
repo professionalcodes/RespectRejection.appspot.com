@@ -13,8 +13,8 @@ a.btn-social {
 }
 
 .main-image-row {
-	height: 50%;
 	background-color: #002266;
+	height: 400px;
 }
 
 .signup-text {
@@ -64,18 +64,4 @@ a.btn-social {
 	width: 75%;
 }
 
-.content {
-  min-height: 100%;
-}
-
-.content-inside {
-  padding: 20px;
-  padding-bottom: 50px;
-}
-
-.footer {
-  height: 50px;
-  margin-top: -50px;
-  background: currentColor;
-}
 
