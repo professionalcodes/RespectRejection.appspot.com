@@ -22,9 +22,21 @@ var routeConfig = function($routeProvider) {
 routeConfig.$inject = ["$routeProvider"];
 app.config(routeConfig);
 
-app.factory('FirebaseService', [function () {
+app.service('AngularHelperService', [function () {
+    
+    var AngularHelperService = {
+        addElementAndCompile: function() {
+            log("angular helper service");
+        },
+    };
+
+    return AngularHelperService;
+}])
+app.factory('FirebaseService', [ function() {
     
     var FirebaseService = {
+        self: this,
+        user: false,
         config: {
             apiKey: "AIzaSyBsxkqcDK_fqEIf_Oja3MOod8L3YIhu4Fw",
             authDomain: "respectrejection.firebaseapp.com",
@@ -50,6 +62,9 @@ app.factory('FirebaseService', [function () {
                 var errorMessage = error.message;
                 var email = error.email;
                 var credential = error.credential;
+                angular.element('#login-error-msg').text(errorMessage);
+                angular.element("#login-error-email").text(email);
+                angular.element('#login-error-modal').modal();
             });
         },
         logout: function() {
@@ -75,9 +90,18 @@ app.factory('FirebaseService', [function () {
             var githubProvider = new firebase.auth.GithubAuthProvider();
             this.login(githubProvider);
         },
+        handleEmailPassword: function(email, password) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                logArgs([errorCode, errorMessage]);
+            });
+        },
         authObserver: function() {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
+                    self.user = user;
                     var loggedInHeader = document.createElement("div");
                     var loggedInBody = document.createElement("div")
                     loggedInHeader.setAttribute('ng-include', "'/logged_in_header'");
@@ -98,6 +122,7 @@ app.factory('FirebaseService', [function () {
                     }]);
 
                 } else {
+                    self.user = false;
                     var notLoggedInHeader = document.createElement("div");
                     var notLoggedInBody = document.createElement("div");
                     notLoggedInHeader.setAttribute('ng-include', "'/not_logged_in_header'");
