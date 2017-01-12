@@ -22,21 +22,31 @@ var routeConfig = function($routeProvider) {
 routeConfig.$inject = ["$routeProvider"];
 app.config(routeConfig);
 
-app.service('AngularHelperService', [function () {
+app.factory('AngularHelperService', [function () {
     
     var AngularHelperService = {
-        addElementAndCompile: function() {
-            log("angular helper service");
+        addNgInclude: function(urlPath) {
+            var ngInclude = document.createElement('div');
+            ngInclude.setAttribute('ng-include', "'path'".replace('path', urlPath));
+            document.body.appendChild(ngInclude);
+            this.compileElement(ngInclude);
+        },
+        compileElement: function(element) {
+            angular.element('body').injector().invoke(['$compile', function ($compile) {
+                var $scope = angular.element(element).scope();
+                $compile(element)($scope);
+                $scope.$apply();
+            }]);
         },
     };
 
     return AngularHelperService;
 }])
-app.factory('FirebaseService', [ function() {
+
+app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperService) {
     
     var FirebaseService = {
         self: this,
-        user: false,
         config: {
             apiKey: "AIzaSyBsxkqcDK_fqEIf_Oja3MOod8L3YIhu4Fw",
             authDomain: "respectrejection.firebaseapp.com",
@@ -45,12 +55,10 @@ app.factory('FirebaseService', [ function() {
             messagingSenderId: "746933029039"
         },
         init: function() {
-            log("initializing firebase app and starting auth observer");
             firebase.initializeApp(this.config);
             this.authObserver();
         },
         test: function() {
-            log('test method being called on object instantiation');
         },
         login: function(provider) {
             firebase.auth().signInWithPopup(provider).then(function(result){
@@ -101,52 +109,18 @@ app.factory('FirebaseService', [ function() {
         authObserver: function() {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    self.user = user;
-                    var loggedInHeader = document.createElement("div");
-                    var loggedInBody = document.createElement("div")
-                    loggedInHeader.setAttribute('ng-include', "'/logged_in_header'");
-                    loggedInBody.setAttribute('ng-include', "'/logged_in_body'");
-                    
-                    document.body.appendChild(loggedInHeader);
-                    angular.element('body').injector().invoke(['$compile', function ($compile) {
-                        var $scope = angular.element(loggedInHeader).scope();
-                        $compile(loggedInHeader)($scope);
-                        $scope.$apply();
-                    }]);
-
-                    document.body.appendChild(loggedInBody);
-                    angular.element('body').injector().invoke(['$compile', function ($compile) {
-                        var $scope = angular.element(loggedInBody).scope();
-                        $compile(loggedInBody)($scope);
-                        $scope.$apply();
-                    }]);
-
+                    AngularHelperService.addNgInclude('logged_in_header');
+                    AngularHelperService.addNgInclude('logged_in_body');
                 } else {
-                    self.user = false;
-                    var notLoggedInHeader = document.createElement("div");
-                    var notLoggedInBody = document.createElement("div");
-                    notLoggedInHeader.setAttribute('ng-include', "'/not_logged_in_header'");
-                    notLoggedInBody.setAttribute('ng-include', "'/not_logged_in_body'");
-                    
-                    document.body.appendChild(notLoggedInHeader);
-                    angular.element('body').injector().invoke(['$compile', function ($compile) {
-                        var $scope = angular.element(notLoggedInHeader).scope();
-                        $compile(notLoggedInHeader)($scope);
-                        $scope.$apply();
-                    }]);
-
-                    document.body.appendChild(notLoggedInBody);
-                    angular.element('body').injector().invoke(['$compile', function ($compile) {
-                        var $scope = angular.element(notLoggedInBody).scope();
-                        $compile(notLoggedInBody)($scope);
-                        $scope.$apply();
-                    }]);
+                    AngularHelperService.addNgInclude('not_logged_in_header');
+                    AngularHelperService.addNgInclude('not_logged_in_body');
                 }
             });
         },
     };
 
     return FirebaseService;
+
 }]);
 
 app.run(['FirebaseService', function (FirebaseService) {
