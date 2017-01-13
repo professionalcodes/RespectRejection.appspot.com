@@ -31,6 +31,11 @@ app.factory('AngularHelperService', [function () {
             document.body.appendChild(ngInclude);
             this.compileElement(ngInclude);
         },
+        addNgView: function() {
+            var ngView = document.createElement("ng-view");
+            document.body.appendChild(ngView);
+            this.compileElement(ngView);
+        },
         compileElement: function(element) {
             angular.element('body').injector().invoke(['$compile', function ($compile) {
                 var $scope = angular.element(element).scope();
@@ -57,8 +62,6 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
         init: function() {
             firebase.initializeApp(this.config);
             this.authObserver();
-        },
-        test: function() {
         },
         login: function(provider) {
             firebase.auth().signInWithPopup(provider).then(function(result){
@@ -103,7 +106,9 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                logArgs([errorCode, errorMessage]);
+                
+                angular.element("#error-msg-container").removeClass('hide');                
+                angular.element("#error-msg").text(errorMessage);
             });
         },
         authObserver: function() {
@@ -111,9 +116,11 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
                 if (user) {
                     AngularHelperService.addNgInclude('logged_in_header');
                     AngularHelperService.addNgInclude('logged_in_body');
+                    AngularHelperService.addNgView();
                 } else {
                     AngularHelperService.addNgInclude('not_logged_in_header');
                     AngularHelperService.addNgInclude('not_logged_in_body');
+                    AngularHelperService.addNgView();
                 }
             });
         },

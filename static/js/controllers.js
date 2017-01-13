@@ -22,9 +22,9 @@ controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', fu
 		FirebaseService.handleGithub();
 	};
 
-	$scope.handleSigninAnon = function() {
-		var email = angular.element("#email");
-		var password = angular.element("#password");
+	$scope.handleEmailPasswordSignin = function() {
+		var email = angular.element("#email").val();
+		var password = angular.element("#password").val();
 		FirebaseService.handleEmailPassword(email, password);
 	};
 

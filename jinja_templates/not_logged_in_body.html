@@ -21,7 +21,11 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-4 col-md-4 signup-form-col text-center">
-			<form id="signup-form" ng-submit="handleSigninAnon()">
+			
+			<form id="signup-form" ng-submit="handleEmailPasswordSignin()">
+				<div id="error-msg-container" class="alert alert-danger fade in hide" style="background-color: #cc0000; color: white; border: none;">
+					<strong id="error-msg"></strong>
+				</div>
 				<h2 class="text-center signup-text">Sign Up</h2>
 				<div class="form-group">
 			    	<label for="email"></label>
