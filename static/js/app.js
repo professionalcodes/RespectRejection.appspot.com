@@ -4,16 +4,6 @@ var app = angular.module('respectRejectionApp', ['respectRejectionAppControllers
 
 /* routing configuration for production */
 var routeConfig = function($routeProvider) {
-    $routeProvider.when('/contact', {
-        templateUrl: '/contact',
-    });
-    $routeProvider.when('/about', {
-        templateUrl: '/about',
-    });
-    $routeProvider.when('/profile', {
-        templateUrl: '/profile',
-        controller: 'ProfileCtrl'
-    });
     $routeProvider.otherwise({
         redirectTo: '/'
     });
@@ -117,6 +107,7 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
                     AngularHelperService.addNgInclude('logged_in_header');
                     AngularHelperService.addNgInclude('logged_in_body');
                     AngularHelperService.addNgView();
+                    
                 } else {
                     AngularHelperService.addNgInclude('not_logged_in_header');
                     AngularHelperService.addNgInclude('not_logged_in_body');

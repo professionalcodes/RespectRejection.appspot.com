@@ -31,12 +31,14 @@ controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', fu
 	$scope.logout = function() {
 		FirebaseService.logout();
 	};
-	
+
+	$scope.showModal = function(modalIdentifier) {
+		angular.element(modalIdentifier).modal();
+	}
+
 	$scope.test = function() {
 		
 	};
-
-	$scope.test();
 
 }]);
 
