@@ -6,6 +6,8 @@ var controllers = respectRejectionApp.controllers = angular.module('respectRejec
 /* RootCtrl handles all signin options */
 controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', function ($scope, $location, FirebaseService) {
 	
+	$scope.donationAmount = 0;
+
 	$scope.handleGoogleSignin = function() {
 		FirebaseService.handleGithub();
 	};
@@ -34,7 +36,7 @@ controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', fu
 
 	$scope.showModal = function(modalIdentifier) {
 		angular.element(modalIdentifier).modal();
-	}
+	};
 
 	$scope.test = function() {
 		

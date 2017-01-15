@@ -64,8 +64,14 @@ a.btn-social {
 	width: 75%;
 }
 
+#donate-btn {
+	width: 100%;
+}
+
 .header-logged-in-container {
 	background-color: black;
 }
+
+
 
 

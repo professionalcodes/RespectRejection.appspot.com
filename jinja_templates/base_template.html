@@ -17,11 +17,20 @@
 		<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
 		<script src="/js/utils.js"></script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>    	
+		<script src="https://checkout.stripe.com/checkout.js"></script>
+		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<script src="/angular/angular.min.js"></script>
 		<script src="/angular/angular-route.min.js"></script>
 		<script src="/js/app.js"></script>
 		<script src="/js/controllers.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+  			(adsbygoogle = window.adsbygoogle || []).push({
+    			google_ad_client: "ca-pub-3833061417735218",
+    			enable_page_level_ads: true
+  			});
+		</script>
 	</head>
 	<body ng-app="respectRejectionApp" ng-controller="RootCtrl">
 		<script>
@@ -106,20 +115,59 @@
 	  		<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
 	      			<div class="modal-header">
-	        			<h5 class="modal-title">Thanks For Contributing!</h5>
+	        			<h3 class="modal-title text-center">Thanks for your contribution</h3>
 	        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          				<span aria-hidden="true">&times;</span>
 	        			</button>
 	      			</div>
 	      			<div class="modal-body">
-	      				<p class="lead"></p>
+						<div class="row">
+							<div class="col-md-12">
+								<span class="payment-errors"></span>									
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 text-right">
+								<span>Card Number</span>
+							</div>
+							<div class="col-md-6 text-left">
+						  		<input type="text" maxlength="16" size="15" data-stripe="number">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 text-right">
+						  		<span>Expiration (MM/YY)</span>
+						  	</div>
+						  	<div class="col-md-6 text-left">
+					  			<input type="text" size="6" maxlength="2" data-stripe="exp_month">
+								<span> / </span>
+								<input type="text" size="6" maxlength="2" data-stripe="exp_year">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 text-right">
+								<span>CVC</span>
+							</div>
+							<div class="col-md-6 text-left">
+						  		<input type="text" maxlength="3" size="15" data-stripe="cvc">
+							</div>	
+						</div>
+						<div class="row">
+							<div class="col-md-6 text-right">
+								<span>Billing ZIP Code</span>
+							</div>
+							<div class="col-md-6 text-left">
+							  	<input type="text" maxlength="5" size="15" data-stripe="address_zip">
+							</div>
+						</div>
 	      			</div>
+
 	      			<div class="modal-footer" style="text-align: center;">
-	        			<button type="button" class="btn btn-success" data-dismiss="modal" style="width: 50%">Confirm Donation</button>
+	        			<button type="button" class="btn btn-success" style="width: 40%" ng-click="handleDonation();">Donate</button>
+	      				<button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 40%">Cancel</button>
 	      			</div>
 	    		</div>
 	  		</div>
-		</div>
-
+		</div>		
 	</body>
 </html>

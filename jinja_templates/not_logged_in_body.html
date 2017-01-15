@@ -2,7 +2,7 @@
 	<div class="row main-image-row" ng-controller="RootCtrl">
 		<div class="col-xs-12 col-sm-6 col-md-4">
 			<p class="header-1 text-center">Create Your Own Customized Rejection Hotline - <span class="lead">and start handing it out to gross people that ask for your number. Cheers #Winning. Also If the site has made you happy and you want to contribute, please click the button below.</span></p>
-			<button class="btn btn-success" ng-click="showModal('#donate-modal');" style="width: 100%">Donate</button>
+			<button class="btn btn-primary" id="donate-btn" ng-click="showModal('#donate-modal');">Donate</button>	
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-4 text-center">
 			<div class="social-media-login-container">
@@ -22,7 +22,6 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-4 signup-form-col text-center">
-			
 			<form id="signup-form" ng-submit="handleEmailPasswordSignin()">
 				<div id="error-msg-container" class="alert alert-danger fade in hide" style="background-color: #cc0000; color: white; border: none;">
 					<strong id="error-msg"></strong>
