@@ -42,6 +42,8 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
     
     var FirebaseService = {
         self: this,
+        loginError: false,
+        customLoginTried: null,
         config: {
             apiKey: "AIzaSyBsxkqcDK_fqEIf_Oja3MOod8L3YIhu4Fw",
             authDomain: "respectrejection.firebaseapp.com",
@@ -92,6 +94,7 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
             this.login(githubProvider);
         },
         handleEmailPasswordSignup: function(email, password) {
+
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -100,19 +103,29 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
                 angular.element("#error-msg-container").removeClass('hide');                
                 angular.element("#error-msg").text(errorMessage);
             });
+
         },
         handleEmailPasswordLogin: function(email, password) {
+
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 angular.element("#custom-login-error-container").removeClass('hide');
                 angular.element("#custom-login-error-msg").html(errorMessage);
+
+                self.loginError = true;
             });
+
+            self.customLoginTried = true;
         },
         authObserver: function() {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
+                    if (self.loginError || ( ! self.loginError && self.customLoginTried)) {
+                        location.reload();
+                    } 
+
                     AngularHelperService.addNgInclude('logged_in_header');
                     AngularHelperService.addNgInclude('logged_in_body');
                     AngularHelperService.addNgView();
