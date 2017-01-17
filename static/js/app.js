@@ -91,7 +91,7 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
             var githubProvider = new firebase.auth.GithubAuthProvider();
             this.login(githubProvider);
         },
-        handleEmailPassword: function(email, password) {
+        handleEmailPasswordSignup: function(email, password) {
             firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -99,6 +99,15 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
                 
                 angular.element("#error-msg-container").removeClass('hide');                
                 angular.element("#error-msg").text(errorMessage);
+            });
+        },
+        handleEmailPasswordLogin: function(email, password) {
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                angular.element("#custom-login-error-container").removeClass('hide');
+                angular.element("#custom-login-error-msg").html(errorMessage);
             });
         },
         authObserver: function() {

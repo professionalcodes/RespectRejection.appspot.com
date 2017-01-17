@@ -24,10 +24,16 @@ controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', fu
 		FirebaseService.handleGithub();
 	};
 
-	$scope.handleEmailPasswordSignin = function() {
+	$scope.handleEmailPasswordSignup = function() {
 		var email = angular.element("#email").val();
 		var password = angular.element("#password").val();
-		FirebaseService.handleEmailPassword(email, password);
+		FirebaseService.handleEmailPasswordSignup(email, password);
+	};
+
+	$scope.handleEmailPasswordLogin = function() {
+		var email = angular.element("#login-email").val();
+		var password = angular.element("#login-password").val();
+		FirebaseService.handleEmailPasswordLogin(email, password);
 	};
 
 	$scope.logout = function() {

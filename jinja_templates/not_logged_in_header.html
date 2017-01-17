@@ -8,7 +8,10 @@
             <li class="nav-item"><a class="nav-link" href="#" ng-click="showModal('#contact-modal');">Contact</a></li>
           	<li class="nav-item"><a class="nav-link" href="#" ng-click="showModal('#about-modal');">About</a></li>
        	</ul>
-    		<ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right">
+            <div id="custom-login-error-container" class="alert alert-danger fade in hide" style="background-color: #cc0000; color: white; border: none;">
+                <strong id="custom-login-error-msg"></strong>
+            </div>
             <form ng-submit="custom-login">
                 <div class="form-row">
                     <div class="col-md-4">
@@ -18,7 +21,7 @@
                         <input class="form-control" type="password" id="login-password" placeholder="Password">
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-primary form-control" style="background: linear-gradient(100deg, #001a4d, #001133)">login</button>
+                        <button class="btn btn-primary form-control" style="background: linear-gradient(100deg, #001a4d, #001133)" ng-click="handleEmailPasswordLogin()">login</button>
                     </div>
                 </div>
             </form>

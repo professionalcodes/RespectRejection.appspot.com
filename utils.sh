@@ -30,6 +30,38 @@ function run_respectrejection {
 	dev_appserver.py ~/OpenSource/CustomRejection/app.yaml 
 }
 
+function search_for_dir {
+	currentDir=`pwd`
+	echo "[+] Calling search_dir command from directory ${currentDir}"
+	
+	start_dir=$1
+	search_dir=$2
+
+	echo "[+] Starting search for directory-name ${search_dir} starting from ${start_dir}"
+
+	cd $startDir
+	for file in `ls * -r`; do
+		if [ "${file}" = "${search_dir}" ]; then
+			echo "[+] Directory found @ ${file}"
+			cd $currentDir
+			return
+		fi
+	done 
+	echo "[-] Directory ${search_dir} not found"
+	cd $currentDir
+}
+
+function show_str_length {
+	string_param=$1
+	echo `expr length $string_param` 
+	# echo ${#string_param} show string length a different way 
+}
+
+function substr {
+	string_param=$1
+	
+}
+
 function show_git_info {
 	git_user_email=`git config user.email`
 	git_username=`git config user.name`
