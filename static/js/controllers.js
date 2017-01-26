@@ -4,7 +4,7 @@ var respectRejectionApp = respectRejectionApp || {};
 var controllers = respectRejectionApp.controllers = angular.module('respectRejectionAppControllers', []);
 
 /* RootCtrl handles all signin options */
-controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', function ($scope, $location, FirebaseService) {
+controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', 'StripeService', function ($scope, $location, FirebaseService, StripeService) {
 	
 	$scope.donationAmount = 0;
 
@@ -35,6 +35,10 @@ controllers.controller('RootCtrl', ['$scope', '$location', 'FirebaseService', fu
 		var password = angular.element("#login-password").val();
 		FirebaseService.handleEmailPasswordLogin(email, password);
 	};
+
+	$scope.handleDonation = function() {
+		StripeService.attemptPayment();
+	}
 
 	$scope.logout = function() {
 		FirebaseService.logout();

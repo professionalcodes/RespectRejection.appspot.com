@@ -119,19 +119,17 @@
 	        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          				<span aria-hidden="true">&times;</span>
 	        			</button>
+	        			<div class="row text-center" style="margin-top: 2%">
+							<span class="payment-errors"></span>									        				
+	        			</div>
 	      			</div>
 	      			<div class="modal-body">
-						<div class="row">
-							<div class="col-md-12">
-								<span class="payment-errors"></span>									
-							</div>
-						</div>
 						<div class="row">
 							<div class="col-md-6 text-right">
 								<span>Card Number</span>
 							</div>
 							<div class="col-md-6 text-left">
-						  		<input type="text" maxlength="16" size="15" data-stripe="number">
+						  		<input type="text" class="card-number" maxlength="16" size="15" data-stripe="number">
 							</div>
 						</div>
 						<div class="row">
@@ -139,9 +137,9 @@
 						  		<span>Expiration (MM/YY)</span>
 						  	</div>
 						  	<div class="col-md-6 text-left">
-					  			<input type="text" size="6" maxlength="2" data-stripe="exp_month">
+					  			<input type="text" class="card-expiry-month" size="6" maxlength="2" data-stripe="exp_month">
 								<span> / </span>
-								<input type="text" size="6" maxlength="2" data-stripe="exp_year">
+								<input type="text" class="card-expiry-year" size="6" maxlength="2" data-stripe="exp_year">
 							</div>
 						</div>
 						<div class="row">
@@ -149,7 +147,7 @@
 								<span>CVC</span>
 							</div>
 							<div class="col-md-6 text-left">
-						  		<input type="text" maxlength="3" size="15" data-stripe="cvc">
+						  		<input type="text" class="card-cvc" maxlength="3" size="15" data-stripe="cvc">
 							</div>	
 						</div>
 						<div class="row">
@@ -157,13 +155,13 @@
 								<span>Billing ZIP Code</span>
 							</div>
 							<div class="col-md-6 text-left">
-							  	<input type="text" maxlength="5" size="15" data-stripe="address_zip">
+							  	<input type="text" class="address_zip" maxlength="5" size="15" data-stripe="address_zip">
 							</div>
 						</div>
 	      			</div>
 
 	      			<div class="modal-footer" style="text-align: center;">
-	        			<button type="button" class="btn btn-success" style="width: 40%" ng-click="handleDonation();">Donate</button>
+	        			<button type="button" class="btn btn-success donate-btn" style="width: 40%" ng-click="handleDonation();">Donate</button>
 	      				<button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 40%">Cancel</button>
 	      			</div>
 	    		</div>

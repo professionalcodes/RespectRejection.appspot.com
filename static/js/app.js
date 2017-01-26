@@ -143,7 +143,48 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
 
 }]);
 
-app.run(['FirebaseService', function (FirebaseService) {
+app.factory('StripeService', [function () {
+    var StripeService = {
+        self: this,
+        setTestKey: function() {
+            Stripe.setPublishableKey('pk_test_PUtiEiTgkjiLy19nfN4aQFzv');
+        },
+        setLiveKey: function() {
+            Stripe.setPublishableKey('pk_live_YBQzKUjQx6HNKFoqouNPTlh4');        
+        },
+        stripeResponseHandler: function(status, response) {
+            if (response.error) {
+                angular.element('.donate-btn').prop('disabled', 'false');
+                angular.element('.payment-errors').text(response.error.message);
+            } else {
+
+            }
+
+            log("ahhhh");
+        },
+        attemptPayment: function() {
+            angular.element('.donate-btn').prop('disabled', true);
+
+            Stripe.card.createToken({
+              number: angular.element('.card-number').val(),
+              cvc: angular.element('.card-cvc').val(),
+              exp_month: angular.element('.card-expiry-month').val(),
+              exp_year: angular.element('.card-expiry-year').val(),
+              address_zip: angular.element('.address_zip').val() 
+            }, StripeService.stripeResponseHandler);
+    
+        },
+        init: function(keyType) {
+            if (keyType === 'live') this.setLiveKey();
+            else if (keyType === 'test') this.setTestKey();
+        }
+    };
+
+    return StripeService;
+}]);
+
+app.run(['FirebaseService', 'StripeService', function (FirebaseService, StripeService) {
     FirebaseService.init();
-}])
+    StripeService.init('test');
+}]);
 
