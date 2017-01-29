@@ -83,3 +83,7 @@ a.btn-social {
 .payment-errors {
 	color: red;
 }
+
+.donation-amount {
+	width: inherit;
+}

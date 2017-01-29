@@ -143,7 +143,7 @@ app.factory('FirebaseService', ['AngularHelperService', function(AngularHelperSe
 
 }]);
 
-app.factory('StripeService', [function () {
+app.factory('StripeService', ['$http', function ($http) {
     var StripeService = {
         self: this,
         setTestKey: function() {
@@ -154,13 +154,27 @@ app.factory('StripeService', [function () {
         },
         stripeResponseHandler: function(status, response) {
             if (response.error) {
-                angular.element('.donate-btn').prop('disabled', 'false');
+                angular.element('.donate-btn').prop('disabled', false);
                 angular.element('.payment-errors').text(response.error.message);
             } else {
-
+                log(response.id);
+                jQuery.ajax({
+                    url: '/donate',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {token: response.id},
+                })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+                
             }
-
-            log("ahhhh");
         },
         attemptPayment: function() {
             angular.element('.donate-btn').prop('disabled', true);
@@ -187,4 +201,18 @@ app.run(['FirebaseService', 'StripeService', function (FirebaseService, StripeSe
     FirebaseService.init();
     StripeService.init('test');
 }]);
+
+/* 
+useful notes 
+stripe response looks like below
+{
+  id: "tok_u5dg20Gra", // Token identifier
+  card: {...}, // Dictionary of the card used to create the token
+  created: 1485482460, // Timestamp of when token was created
+  currency: "usd", // Currency that the token was created in
+  livemode: false, // Whether this token was created with a live API key
+  object: "token", // Type of object, always "token"
+  used: false // Whether this token has been used
+}
+*/
 

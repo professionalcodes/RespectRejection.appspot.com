@@ -24,6 +24,7 @@ gulp.task('reload:onsave', [], function() {
 	gulp.watch(filepaths.js, []).on('change', reload); 
 	gulp.watch(filepaths.angular, ['compile:typescripts']).on('change', reload); 
 	gulp.watch(filepaths.app_configuration, []).on('change', reload);
+	
 });
 
 

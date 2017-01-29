@@ -158,6 +158,14 @@
 							  	<input type="text" class="address_zip" maxlength="5" size="15" data-stripe="address_zip">
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6 text-right">
+								<span>Donation Amount</span>
+							</div>
+							<div class="col-md-6 text-left">
+								<input type="number" min="1" class="donation-amount" size="15" id="donation-amount">
+							</div>
+						</div>
 	      			</div>
 
 	      			<div class="modal-footer" style="text-align: center;">
@@ -166,6 +174,18 @@
 	      			</div>
 	    		</div>
 	  		</div>
-		</div>		
+		</div>
+		<script>
+			angular.element(document).ready(function() {
+				$('#donate-modal').on('hidden.bs.modal', function () {
+					// just here as a note that this runs after the bottom one
+				});
+
+				/* This event runs first then the one above when closing a specific modal. The one above waits for css to finish */
+				$('#donate-modal').on('hide.bs.modal', function () {
+  					angular.element(".payment-errors").html("");
+				});
+			});
+		</script>		
 	</body>
 </html>

@@ -20,6 +20,7 @@ import random
 import pickle
 import string
 import json
+import logging
 
 template_dir = os.path.join(os.path.dirname(__file__), 'jinja_templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -44,7 +45,14 @@ class Homepage(MainHandler):
 	def post(self):
 		pass
 
+class Donate(MainHandler):
+	def get(self):
+		pass
 
+	def post(self):
+		stripe_token = self.request.get("token")
+		logging.info(stripe_token)
+		
 class DeAuthFB(MainHandler):
 	def get(self):
 		pass
@@ -90,5 +98,5 @@ app = webapp2.WSGIApplication([
     ('/not_logged_in_body', NotLoggedInBody),
     ('/logged_in_body', LoggedInBody),
     ('/deauthfb', DeAuthFB),
-
+    ('/donate', Donate),
 ], debug=True)
