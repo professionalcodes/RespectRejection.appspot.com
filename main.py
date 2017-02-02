@@ -23,10 +23,13 @@ import json
 import logging
 import stripe
 import random
+from configuration import config 
 from google.appengine.ext import ndb
 
 template_dir = os.path.join(os.path.dirname(__file__), 'jinja_templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
+
+StripeController.set_test_key()
 
 class MainHandler(webapp2.RequestHandler):
 
@@ -68,7 +71,6 @@ class Donate(MainHandler):
 class StripeController(object):
 	"""StripeController for encapsulating stripe functionality. """
 
-
 	@classmethod
 	def make_idempotency_key(cls):	 
 		key = generate_random_string()
@@ -77,23 +79,36 @@ class StripeController(object):
 		return key 
 
 	@classmethod
-	def make_charge(cls, token, charge_amount, customer, currency_type, charge_description):
+	def make_charge(cls, token, charge_amount, customer_for_charge, currency_type, charge_description):
 		charge = stripe.Charge.create(
   			amount=charge_amount,
   			currency=currency_type,
   			description=charge_description,
   			source=token,
-  			idempotency_key=cls.make_idempotency_key()
+  			idempotency_key=cls.make_idempotency_key(),
+  			customer=customer_for_charge,
 		)
 		logging.info(charge)
-		
+
+	@classmethod
+	def make_donation_charge(cls, token, charge_amount, currency_type):
+		charge = stripe.Charge.create(
+  			amount=charge_amount,
+  			currency=currency_type,
+  			description="Donation",
+  			source=token,
+  			idempotency_key=cls.make_idempotency_key(),
+		)
+
+		logging.info(charge)
+
 	@classmethod
 	def set_test_key(cls):
-		stripe.api_key = "sk_test_2SesnVyk4RA3wK2NabaftD4D"
+		stripe.api_key = config['stripe_test_key']
 
 	@classmethod
 	def set_live_key(cls):
-		stripe.api_key = "sk_live_VpvtryFaxqePRCXPsOwnmjD9"	
+		stripe.api_key = config['stripe_live_key']
 
 class StripeDAO(ndb.expando):
 	idempotency_key = ndb.StringProperty()
