@@ -21,6 +21,9 @@ import pickle
 import string
 import json
 import logging
+import stripe
+import random
+from google.appengine.ext import ndb
 
 template_dir = os.path.join(os.path.dirname(__file__), 'jinja_templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -51,8 +54,59 @@ class Donate(MainHandler):
 
 	def post(self):
 		stripe_token = self.request.get("token")
-		logging.info(stripe_token)
+		donation_amount = self.request.get("donation_amount")
+		StripeController.make_charge(stripe_token, donation_amount)
+		try:
+			pass
+		except Exception, e:
+			raise
+		else:
+			pass
+		finally:
+			pass
+
+class StripeController(object):
+	"""StripeController for encapsulating stripe functionality. """
+
+
+	@classmethod
+	def make_idempotency_key(cls):	 
+		key = generate_random_string()
+		while StripeDAO.contains_key(key):
+			key = generate_random_string()
+		return key 
+
+	@classmethod
+	def make_charge(cls, token, charge_amount, customer, currency_type, charge_description):
+		charge = stripe.Charge.create(
+  			amount=charge_amount,
+  			currency=currency_type,
+  			description=charge_description,
+  			source=token,
+  			idempotency_key=cls.make_idempotency_key()
+		)
+		logging.info(charge)
 		
+	@classmethod
+	def set_test_key(cls):
+		stripe.api_key = "sk_test_2SesnVyk4RA3wK2NabaftD4D"
+
+	@classmethod
+	def set_live_key(cls):
+		stripe.api_key = "sk_live_VpvtryFaxqePRCXPsOwnmjD9"	
+
+class StripeDAO(ndb.expando):
+	idempotency_key = ndb.StringProperty()
+
+	@classmethod
+	def contains_key(cls, key):
+		query = cls.query(idempotency_key == key)
+		return query != None 
+
+	@classmethod
+	def store_charge(cls, charge):
+		pass
+
 class DeAuthFB(MainHandler):
 	def get(self):
 		pass
@@ -87,6 +141,11 @@ class LoggedInBody(MainHandler):
 class NotLoggedInBody(MainHandler):
 	def get(self):
 		self.render("not_logged_in_body.html")
+		
+def generate_random_string():
+	string_length = 10
+	string_from_which_created = string.digits + string.letters + string.digits
+	return ''.join([string_from_which_created[random.randint(0, string_length)] for i in range(string_length)])
 
 app = webapp2.WSGIApplication([
     ('/', Homepage),

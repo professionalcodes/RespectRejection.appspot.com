@@ -157,22 +157,33 @@ app.factory('StripeService', ['$http', function ($http) {
                 angular.element('.donate-btn').prop('disabled', false);
                 angular.element('.payment-errors').text(response.error.message);
             } else {
-                log(response.id);
-                jQuery.ajax({
-                    url: '/donate',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {token: response.id},
-                })
-                .done(function() {
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
+                var donationInput = document.getElementById("donation-amount");
+                var type = donationInput.type;
+                if (type !== "number") {
+                    donationInput.setAttribute("type", "number");
+                    alert("Please re-enter the donation amount"); 
+                    angular.element('.donate-btn').prop('disabled', false);
+                } else {
+
+                    jQuery.ajax({
+                        url: '/donate',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            token: response.id,
+                            donation_amount: angular.element("#donation-amount").val(),
+                        },
+                    })
+                    .done(function() {
+                        console.log("success");
+                    })
+                    .fail(function() {
+                        // usually occurs if the server doesnt send a response
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                }
                 
             }
         },
