@@ -29,8 +29,6 @@ from google.appengine.ext import ndb
 template_dir = os.path.join(os.path.dirname(__file__), 'jinja_templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
-StripeController.set_test_key()
-
 class MainHandler(webapp2.RequestHandler):
 
 	def write(self, *args, **kwargs):
@@ -58,7 +56,8 @@ class Donate(MainHandler):
 	def post(self):
 		stripe_token = self.request.get("token")
 		donation_amount = self.request.get("donation_amount")
-		StripeController.make_charge(stripe_token, donation_amount)
+		currency_type = self.request.get("currency_type")
+		StripeController.make_donation_charge(stripe_token, donation_amount, currency_type)
 		try:
 			pass
 		except Exception, e:
@@ -68,7 +67,7 @@ class Donate(MainHandler):
 		finally:
 			pass
 
-class StripeController(object):
+class StripeController():
 	"""StripeController for encapsulating stripe functionality. """
 
 	@classmethod
@@ -110,12 +109,14 @@ class StripeController(object):
 	def set_live_key(cls):
 		stripe.api_key = config['stripe_live_key']
 
-class StripeDAO(ndb.expando):
+StripeController.set_test_key()
+
+class StripeDAO(ndb.Expando):
 	idempotency_key = ndb.StringProperty()
 
 	@classmethod
 	def contains_key(cls, key):
-		query = cls.query(idempotency_key == key)
+		query = cls.query(cls.idempotency_key == key)
 		return query != None 
 
 	@classmethod

@@ -1,0 +1,6 @@
+add ads to the homepage
+add footer to respect rejection.
+polish stripe functionality
+recorrect the way the profile is loade
+
+
