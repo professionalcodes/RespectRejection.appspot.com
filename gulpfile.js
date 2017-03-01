@@ -1,6 +1,6 @@
 var gulp 			= require('gulp'),
 	browserSync 	= require('browser-sync').create(),
-	reload 			= browserSync.reload,
+	reload 			= browserSync.reload;
 
 var filepaths = {
 	jinja	: 'jinja_templates/*.html',
